@@ -3,13 +3,13 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
-
+using TMPro;
 public class PlayerController : MonoBehaviour
 {
     // Variables
     private Rigidbody2D rb;
     public int force;
-    private bool isGround;
+    private bool isGround = true;
 
     public float speed;
     void Start()
@@ -18,13 +18,17 @@ public class PlayerController : MonoBehaviour
     }
 
     // Update is called once per frame
-    void LateUpdate()
+    private void Update()
     {
         Move();
         Jump();
-        
+        if (transform.position.y < -6f)
+        {
+            Debug.Log("You are dead");
+            Time.timeScale = 0;
+        }
     }
-
+    
     void Move()
     {
         float horizontalMove = Input.GetAxis("Horizontal");
@@ -50,6 +54,7 @@ public class PlayerController : MonoBehaviour
         if (other.gameObject.CompareTag("Enemy"))
         {
             Debug.Log(("You are dead"));
+            Time.timeScale = 0;
         }
     }
 
