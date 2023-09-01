@@ -10,6 +10,7 @@ public class PlayerController : MonoBehaviour
     private Rigidbody2D rb;
     public int force;
     private bool isGround = true;
+    public bool isAlive = true;
 
     public float speed;
     void Start()
@@ -25,6 +26,7 @@ public class PlayerController : MonoBehaviour
         if (transform.position.y < -6f)
         {
             Debug.Log("You are dead");
+            isAlive = false;
             Time.timeScale = 0;
         }
     }
@@ -54,6 +56,7 @@ public class PlayerController : MonoBehaviour
         if (other.gameObject.CompareTag("Enemy"))
         {
             Debug.Log(("You are dead"));
+            isAlive = false;
             Time.timeScale = 0;
         }
     }
