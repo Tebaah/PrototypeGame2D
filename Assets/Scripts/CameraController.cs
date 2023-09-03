@@ -6,8 +6,7 @@ public class CameraController : MonoBehaviour
 {
     // Variables
     public GameObject target;
-
-    private Vector3 offset = new Vector3(0, 0, -10);
+    private float zRange = -10f;
     // Start is called before the first frame update
     void Start()
     {
@@ -19,11 +18,11 @@ public class CameraController : MonoBehaviour
     {
         if (target.transform.position.x < 0)
         {
-            transform.position = new Vector3(0, transform.position.y, -10);
+            transform.position = new Vector3(0, transform.position.y, zRange);
         }
         else
         {
-            transform.position = target.transform.position + offset;    
+            transform.position = new Vector3(target.transform.position.x, 2.5f, zRange);    
         }
     }
 }

@@ -21,8 +21,6 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     private void Update()
     {
-        Move();
-        Jump();
         if (transform.position.y < -6f)
         {
             Debug.Log("You are dead");
@@ -30,7 +28,13 @@ public class PlayerController : MonoBehaviour
             Time.timeScale = 0;
         }
     }
-    
+
+    private void LateUpdate()
+    {
+        Move();
+        Jump();;
+    }
+
     void Move()
     {
         float horizontalMove = Input.GetAxis("Horizontal");
@@ -43,6 +47,7 @@ public class PlayerController : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space) && isGround)
         {
             rb.AddForce(Vector2.up * force);
+            isGround = false;
         }
     }
 
@@ -50,6 +55,7 @@ public class PlayerController : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Ground"))
         {
+            Debug.Log($"Is Grounded,{isGround}");
             isGround = true;
         }
 
@@ -58,14 +64,6 @@ public class PlayerController : MonoBehaviour
             Debug.Log(("You are dead"));
             isAlive = false;
             Time.timeScale = 0;
-        }
-    }
-
-    private void OnCollisionExit2D(Collision2D other)
-    {
-        if (other.gameObject.CompareTag("Ground"))
-        {
-            isGround = false;
         }
     }
 }
