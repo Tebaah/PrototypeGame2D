@@ -21,6 +21,8 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     private void Update()
     {
+        Move();
+        Jump();
         if (transform.position.y < -6f)
         {
             Debug.Log("You are dead");
@@ -28,13 +30,7 @@ public class PlayerController : MonoBehaviour
             Time.timeScale = 0;
         }
     }
-
-    private void LateUpdate()
-    {
-        Move();
-        Jump();;
-    }
-
+    
     void Move()
     {
         float horizontalMove = Input.GetAxis("Horizontal");
